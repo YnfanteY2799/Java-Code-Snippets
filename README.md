@@ -64,3 +64,35 @@ public static void unzip(String zipFilePath /*, String destDir*/) throws Excepti
             e.printStackTrace();
             throw new Exception();
         }
+
+
+------------------------------------------------------------------------------------------>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+     
+            NEW METHOD                                  ->>>>>>>>>>>>> 01-03-2021
+                 
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<-----------------------------------------------------------------------------
+
+
+
+    public static void checkZipIntegrity(String zipDir){
+        try{
+
+            ZipFile zipFile = new ZipFile(zipDir);
+
+            Enumeration <? extends ZipEntry> entries = zipFile.entries();
+
+            while(entries.hasMoreElements()){
+                ZipEntry entry = entries.nextElement();
+                String name = entry.getName();
+                long compressedSize = entry.getCompressedSize();
+                long normalSize = entry.getSize();
+                String type = entry.isDirectory() ? "DIR " : "FILE";
+                System.out.println(name);
+                System.out.format("\t %s - %d - %d\n", type, compressedSize, normalSize);
+            }
+            zipFile.close();
+        }catch (Exception error){
+            System.err.println(error);
+        }
+        
+    }
