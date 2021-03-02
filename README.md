@@ -17,7 +17,7 @@ Extracting files from a Zip, and putting one of them in memory -----------------
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< --------------------------------------------------------------------------------
 
-public static void unzip(String zipFilePath /*, String destDir*/) throws Exception {
+ public static void unzip(String zipFilePath , String destDir) throws Exception {
         int BUFFER = 2048;
 
         try {
@@ -44,19 +44,19 @@ public static void unzip(String zipFilePath /*, String destDir*/) throws Excepti
                 is = new BufferedInputStream (zipfile.getInputStream(entry));
                 int count;
                 byte data[] = new byte[BUFFER];
-//                FileOutputStream fos = new FileOutputStream(destDir + File.separator + entry.getName ());        dest = new BufferedOutputStream(fos, BUFFER);
+                FileOutputStream fos = new FileOutputStream(destDir + File.separator + entry.getName ());        dest = new BufferedOutputStream(fos, BUFFER);
 
                 OutputStream out = new ByteArrayOutputStream();
                 while ((count = is.read(data, 0, BUFFER)) != -1) {
-//                    dest.write(data, 0, count);
-                        out.write(data,0,count);
-//                    System.out.println(is.read(data, 0, BUFFER));
+                    dest.write(data, 0, count);
+                      out.write(data,0,count);
+                    System.out.println(is.read(data, 0, BUFFER));
                 }
 
                 System.out.println("A" + out);
 
-//                dest.flush();
-//                dest.close();
+                dest.flush();
+                dest.close();
                 is.close();
             }
         }
